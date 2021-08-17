@@ -4,10 +4,11 @@ on:
     workflow_dispatch
 
 jobs:
-  commit:
+  update_members:
 
     runs-on: ubuntu-latest
-    
+    permissions:
+        contents: write
     steps:
     - uses: actions/checkout@v2
       with:
@@ -18,5 +19,5 @@ jobs:
       run: |
         pip install beautifulsoup4
         pip install lxml
-        python elect_com_mon.py -l 1
+        python elect_com_mon.py
         bash push.sh
