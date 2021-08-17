@@ -17,5 +17,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         pip install beautifulsoup4
+        pip install lxml
         python elect_com_mon.py -l 1
         bash push.sh
