@@ -1,0 +1,20 @@
+name: update_members
+
+on:
+    workflow_dispatch
+
+jobs:
+  commit:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        ref: master
+    - name: Update members.tsv
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        python elect_com_mon.py -l 1
+        bash push.sh
