@@ -1,7 +1,9 @@
 name: update_members
 
 on:
-    workflow_dispatch
+  schedule:
+    - cron: '18 10 * * *'
+  workflow_dispatch:
 
 jobs:
   update_members:

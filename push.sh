@@ -6,8 +6,11 @@ setup_git() {
 }
 
 git_commit_members_and_diffs() {
+    git diff --stat
+    git diff --shortstat members.tsv
+    
     git add members.tsv
-    git add diffs
+    git add diffs/*.txt
     git commit --message "Members of election commissions of Saint-Petersburg as of "$(date +'%Y-%m-%d')
 }
 
@@ -28,7 +31,9 @@ prepare_diffs() {
     # grep -v '@@' diffs/full | awk -F'\t' 'NF>4&&$2=="ТИК № 21"{print $0}' | head
     
     tail -n +2 members.tsv | cut -f 2 | sort -u | sed 's/^$/ЦИК/' | xargs -I {} bash -c 'grep -v @@ diffs/full | awk -v var="$1" -F'"'"'\t'"'"' '"'"'NF>4&&($2==var||(var=="ЦИК"&&$2=="")){print $0}'"'"' > diffs/"$1".txt' -- {}
+    ls -l diffs
     rm diffs/full
+    find /diffs -size 0 -print -delete
 }
 
 setup_git
@@ -37,8 +42,7 @@ ret_val=$?
 if [ $ret_val -ne 0 ]; then
     prepare_diffs
     git_commit_members_and_diffs
-    # git_push
-    ls -l diffs
+    git_push
 else
     echo "No changes found"
 fi
