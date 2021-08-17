@@ -11,7 +11,7 @@ git_commit_members_and_diffs() {
     
     git add members.tsv
     git add diffs/*.txt
-    git commit --message "Members of election commissions of Saint-Petersburg as of "$(date +'%Y-%m-%d')
+    git commit --message $(date +'%Y-%m-%d')" automatic update"
 }
 
 git_push() {
