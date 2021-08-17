@@ -37,7 +37,8 @@ if [ $ret_val -ne 0 ]; then
     prepare_diffs
     git_commit_members_and_diffs
     # git_push
+    ls -l diffs
 else
     echo "No changes found"
-    wc members.tsv
 fi
+wc members.tsv
