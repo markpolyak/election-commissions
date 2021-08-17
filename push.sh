@@ -33,7 +33,7 @@ prepare_diffs() {
 setup_git
 git diff -s --exit-code members.tsv
 ret_val=$?
-if [ $retVal -ne 0 ]; then
+if [ $ret_val -ne 0 ]; then
     prepare_diffs
     git_commit_members_and_diffs
     # git_push
