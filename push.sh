@@ -12,7 +12,7 @@ git_commit_members_and_diffs() {
 }
 
 git_push() {
-    git checkout -b master
+    git checkout -b main
     git remote remove origin
     git remote add origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
     git push origin HEAD
