@@ -15,7 +15,7 @@ git_commit_members_and_diffs() {
 }
 
 git_push() {
-    git checkout -b main
+    # git checkout -b main
     git remote remove origin
     git remote add origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
     git push origin HEAD
@@ -33,7 +33,7 @@ prepare_diffs() {
     tail -n +2 members.tsv | cut -f 2 | sort -u | sed 's/^$/ЦИК/' | xargs -I {} bash -c 'grep -v @@ diffs/full | awk -v var="$1" -F'"'"'\t'"'"' '"'"'NF>4&&($2==var||(var=="ЦИК"&&$2=="")){print $0}'"'"' > diffs/"$1".txt' -- {}
     ls -l diffs
     rm diffs/full
-    find /diffs -size 0 -print -delete
+    find diffs -size 0 -print -delete
 }
 
 setup_git
