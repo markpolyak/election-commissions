@@ -39,10 +39,8 @@ def get_members(commission):
         ]
         for table in soup.find_all('table')
     ]
-
-    # table[0] is a placeholder
-    # table[1] is a navigation block
-    # table[2] has the data
+    
+    # table[0] has the data
     for names in tables[2]:
         if len(names) == 4:
             members_list.append(
